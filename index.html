@@ -371,12 +371,17 @@
     background:none;
     border:none;
     padding:0;
+    outline:none !important;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .node-btn:focus, .node-btn:focus-visible{
+    outline:none !important;
   }
   .node-circle{
     fill:var(--void);
     stroke:var(--brass);
     stroke-width:1.4;
-    transition:fill .4s var(--ease), stroke .4s var(--ease), transform .4s var(--ease);
+    transition:fill .4s var(--ease), stroke .4s var(--ease), transform .4s var(--ease), filter .4s var(--ease);
     transform-origin:center;
     transform-box:fill-box;
   }
@@ -397,11 +402,11 @@
   .node-btn:hover .node-circle, .node-btn.active .node-circle{
     fill:var(--wine);
     stroke:var(--brass-bright);
-    transform:scale(1.08);
+    filter:drop-shadow(0 0 8px rgba(221,189,133,0.5));
+    transform:scale(1.1);
   }
   .node-btn:hover .node-icon, .node-btn.active .node-icon{ stroke:var(--brass-bright); }
   .node-btn:hover .node-label, .node-btn.active .node-label{ fill:var(--brass-bright); }
-  .node-btn:focus-visible .node-circle{ stroke:var(--lavender); stroke-width:2; }
 
   /* 3D spinning logo embedded in center of wheel */
   .seal-center-3d-box{
@@ -423,12 +428,18 @@
   }
 
   .service-panel{
-    max-width:560px;
-    margin:56px auto 0;
-    min-height:150px;
-    text-align:left;
-    border-top:1px solid var(--lavender-dim);
-    padding-top:32px;
+    max-width:640px;
+    margin:48px auto 0;
+    min-height:160px;
+    text-align:center;
+    background:rgba(12, 9, 25, 0.7);
+    border:1px solid rgba(176, 141, 87, 0.4);
+    border-radius:4px;
+    padding:32px 36px;
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.5), inset 0 0 25px rgba(176,141,87,0.06);
+    transition:opacity .3s var(--ease), transform .3s var(--ease);
   }
   .service-panel .eyebrow{ display:block; margin-bottom:10px; }
   .service-panel h3{
@@ -436,7 +447,7 @@
     color:var(--parchment);
     margin-bottom:14px;
   }
-  .service-panel p{ color:var(--parchment-dim); font-size:19px; }
+  .service-panel p{ color:var(--parchment-dim); font-size:18px; line-height:1.6; }
   .service-panel .hint{
     color:var(--lavender-dim);
     font-family:var(--display);
@@ -948,32 +959,32 @@
     {
       id:'meditation', label:'Meditation', icon:'icon-meditation',
       title:'Guided Meditation',
-      body:"Past the noise of the waking mind into the quiet where the chart speaks clearest. Sessions are tailored to your current transits — no two are the same."
+      body:"One-on-one guided journeys designed to quiet mental chatter and drop into somatic stillness. Sessions are tailored to your current planetary transits to ground astrological insights directly into bodily presence."
     },
     {
       id:'classes', label:'Classes', icon:'icon-classes',
       title:'Astrology Classes',
-      body:"Learn to read your own sky. Small live cohorts move through structured modules built for retention, not memorization:<br><br><strong>• Foundations & The Houses:</strong> Decode planets, signs, and twelve-house architecture.<br><strong>• Aspects & Dynamics:</strong> Read geometric planetary conversations, tensions, and gifts.<br><strong>• Transits & Timing:</strong> Track personal cycles and current sky movements.<br><strong>• Chart Synthesis:</strong> Unify all placements into a cohesive, fluid interpretation."
+      body:"Learn to read your own sky. Small cohorts move through structured modules—from twelve-house architecture and planetary aspects to transit tracking and holistic chart synthesis."
     },
     {
       id:'readings', label:'Readings', icon:'icon-readings',
       title:'Astrology Readings',
-      body:"A full walkthrough of your natal chart — placements, aspects, and the patterns that keep repeating until they're named. Delivered live or recorded to keep."
+      body:"A full walkthrough of your natal blueprint—placements, aspects, and recurring life patterns. Focused on naming what is already moving underneath so you can navigate life with clarity and intention."
     },
     {
       id:'tarot', label:'Tarot', icon:'icon-tarot',
       title:'Intuitive Tarot',
-      body:"Cards read against the backdrop of your current chart, not in isolation. What's being asked of you right now, and what's simply asking to be seen."
+      body:"Archetypal card inquiries read against the backdrop of your current chart transits rather than in isolation, illuminating what is asking to be seen right now."
     },
     {
       id:'portrait', label:'Portraits', icon:'icon-portrait',
       title:'Energy Portraits',
-      body:"A bespoke, hand-rendered piece built from your chart's dominant frequencies — color, form, and sacred geometry composed to reflect the vibrational architecture of your energy field rather than physical likeness."
+      body:"A bespoke, hand-rendered artwork translated from your natal chart’s dominant planetary frequencies, elemental weights, and sacred geometry—reflecting the vibrational architecture of your energy field rather than physical facial likeness."
     },
     {
       id:'astral', label:'Astral', icon:'icon-astral',
       title:'Astral Projection',
-      body:"One-on-one guidance into conscious out-of-body practice, for those already meditating regularly and ready to go further."
+      body:"One-on-one guidance into conscious out-of-body navigation and deep trance states, designed for those meditating regularly and ready to explore expanded awareness in a grounded framework."
     }
   ];
 
@@ -1053,20 +1064,33 @@
     function activate(){
       NODES_G.querySelectorAll('.node-btn').forEach(n=>n.classList.remove('active'));
       btn.classList.add('active');
-      panel.innerHTML = `
-        <span class="eyebrow">House ${idx+1} of 6</span>
-        <h3>${p.title}</h3>
-        <p>${p.body}</p>
-        <div style="margin-top:20px;">
-          <a href="#intake" class="btn" style="padding:10px 20px; font-size:11px;" onclick="selectServiceIntake('${p.title}')">Select Service &rarr;</a>
-        </div>
-      `;
+      panel.style.opacity = '0';
+      panel.style.transform = 'translateY(8px)';
+      setTimeout(() => {
+        panel.innerHTML = `
+          <span class="eyebrow">House ${idx+1} of 6</span>
+          <h3>${p.title}</h3>
+          <p>${p.body}</p>
+          <div style="margin-top:24px;">
+            <a href="#intake" class="btn" style="padding:10px 22px; font-size:11px;" onclick="selectServiceIntake('${p.title}')">Select ${p.title} &rarr;</a>
+          </div>
+        `;
+        panel.style.opacity = '1';
+        panel.style.transform = 'translateY(0)';
+      }, 150);
     }
     btn.addEventListener('click', activate);
     btn.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); activate(); }});
 
     NODES_G.appendChild(btn);
   });
+
+  // Activate Portraits by default on load
+  setTimeout(() => {
+    if(NODES_G.children && NODES_G.children[4]) {
+      NODES_G.children[4].dispatchEvent(new Event('click'));
+    }
+  }, 100);
 })();
 
 window.selectServiceIntake = function(serviceTitle){
