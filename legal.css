@@ -1,0 +1,114 @@
+/* ---------------------------------------------------------
+   VENA MERCURI - LEGAL PAGES STYLING
+--------------------------------------------------------- */
+:root {
+  --void: #08070c;
+  --void-deep: #050408;
+  --brass: #b08d57;
+  --brass-bright: #ddbd85;
+  --wine: #5c1a2b;
+  --parchment: #ede6d6;
+  --parchment-dim: #cfc6b0;
+  --lavender: #a79bc4;
+  --lavender-dim: #6c6389;
+
+  --display: "Cinzel", serif;
+  --body: "EB Garamond", serif;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--void-deep);
+  color: var(--parchment);
+  font-family: var(--body);
+  font-size: 19px;
+  line-height: 1.7;
+  padding: 40px 24px 80px;
+}
+
+a { color: var(--brass-bright); text-decoration: none; transition: color .3s var(--ease); }
+a:hover { color: var(--parchment); }
+
+.legal-nav {
+  max-width: 800px;
+  margin: 0 auto 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--lavender-dim);
+  padding-bottom: 20px;
+  font-family: var(--display);
+  font-size: 13px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.legal-mark { color: var(--parchment); font-size: 16px; }
+.legal-back { color: var(--lavender); }
+.legal-back:hover { color: var(--brass-bright); }
+
+.legal-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.legal-eyebrow {
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--brass);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.legal-wrap h1 {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 44px);
+  margin-bottom: 10px;
+  color: var(--parchment);
+}
+
+.legal-updated {
+  color: var(--lavender-dim);
+  font-size: 15px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.legal-wrap h2 {
+  font-family: var(--display);
+  font-size: 22px;
+  color: var(--brass-bright);
+  margin-top: 36px;
+  margin-bottom: 14px;
+}
+
+.legal-wrap p {
+  color: var(--parchment-dim);
+  margin-bottom: 20px;
+}
+
+.legal-wrap ul {
+  margin-left: 24px;
+  margin-bottom: 24px;
+  color: var(--parchment-dim);
+}
+
+.legal-wrap li {
+  margin-bottom: 8px;
+}
+
+.legal-footer {
+  max-width: 800px;
+  margin: 80px auto 0;
+  padding-top: 30px;
+  border-top: 1px solid rgba(108,99,137,.3);
+  text-align: center;
+  font-family: var(--display);
+  font-size: 12px;
+  letter-spacing: .15em;
+  color: var(--lavender-dim);
+  text-transform: uppercase;
+}
