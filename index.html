@@ -342,9 +342,19 @@
   .services{ position:relative; z-index:1; text-align:center; }
   .services .section-head{ margin-left:auto; margin-right:auto; text-align:center; }
 
+  .services-interactive-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:center;
+    max-width:1120px;
+    margin:0 auto;
+  }
+
   .seal-wrap{
     position:relative;
-    max-width:620px;
+    max-width:500px;
+    width:100%;
     margin:0 auto;
     aspect-ratio:1/1;
   }
@@ -428,14 +438,14 @@
   }
 
   .service-panel{
-    max-width:640px;
-    margin:48px auto 0;
-    min-height:160px;
-    text-align:center;
-    background:rgba(12, 9, 25, 0.7);
+    max-width:520px;
+    margin:0;
+    min-height:220px;
+    text-align:left;
+    background:rgba(12, 9, 25, 0.75);
     border:1px solid rgba(176, 141, 87, 0.4);
     border-radius:4px;
-    padding:32px 36px;
+    padding:36px 40px;
     backdrop-filter:blur(8px);
     -webkit-backdrop-filter:blur(8px);
     box-shadow:0 15px 35px rgba(0,0,0,0.5), inset 0 0 25px rgba(176,141,87,0.06);
@@ -453,6 +463,18 @@
     font-family:var(--display);
     font-size:13px;
     letter-spacing:.1em;
+  }
+
+  @media (max-width:920px){
+    .services-interactive-grid{
+      grid-template-columns:1fr;
+      gap:32px;
+    }
+    .service-panel{
+      margin:0 auto;
+      text-align:center;
+      padding:28px 24px;
+    }
   }
 
   /* ---------------------------------------------------------
@@ -719,56 +741,58 @@
     <p>Each service sits at its own house. Select one to read what it holds — the wheel keeps turning regardless of what you choose.</p>
   </div>
 
-  <div class="seal-wrap reveal" id="sealWrap">
-    <svg viewBox="0 0 500 500" id="sealSvg" role="img" aria-label="Interactive wheel of services">
-      <defs>
-        <g id="icon-meditation">
-          <path d="M12 3 A8 8 0 1 0 12 19 A6.2 6.2 0 0 1 12 3 Z"/>
-        </g>
-        <g id="icon-classes">
-          <path d="M3 9 L12 4.5 L21 9 L12 13.5 Z"/>
-          <path d="M7 11.2 V16 C7 17.5 9.2 19 12 19 C14.8 19 17 17.5 17 16 V11.2"/>
-          <path d="M21 9 V14.5"/>
-        </g>
-        <g id="icon-readings">
-          <path d="M2 12 C5 6.5 9 4 12 4 C15 4 19 6.5 22 12 C19 17.5 15 20 12 20 C9 20 5 17.5 2 12 Z"/>
-          <circle cx="12" cy="12" r="3"/>
-        </g>
-        <g id="icon-tarot">
-          <rect x="4" y="6" width="9" height="14" rx="1" transform="rotate(-8 4 6)"/>
-          <rect x="9.5" y="4.5" width="9" height="14" rx="1"/>
-        </g>
-        <g id="icon-portrait">
-          <circle cx="12" cy="12" r="8.5"/>
-          <circle cx="12" cy="12" r="4.7"/>
-          <circle cx="12" cy="12" r="1"/>
-        </g>
-        <g id="icon-astral">
-          <path d="M12 3 C7 3 4 6.4 4 10.5 C4 15 8 18 13 18 C10.5 19.6 7.5 20 5 19.3 C7.7 21.3 12.3 21.6 15.5 19.3 C19.6 17.6 21.5 13.3 20 9.3 C18.8 6 15.7 3 12 3 Z"/>
-        </g>
-      </defs>
+  <div class="services-interactive-grid">
+    <div class="seal-wrap reveal" id="sealWrap">
+      <svg viewBox="0 0 500 500" id="sealSvg" role="img" aria-label="Interactive wheel of services">
+        <defs>
+          <g id="icon-meditation">
+            <path d="M12 3 A8 8 0 1 0 12 19 A6.2 6.2 0 0 1 12 3 Z"/>
+          </g>
+          <g id="icon-classes">
+            <path d="M3 9 L12 4.5 L21 9 L12 13.5 Z"/>
+            <path d="M7 11.2 V16 C7 17.5 9.2 19 12 19 C14.8 19 17 17.5 17 16 V11.2"/>
+            <path d="M21 9 V14.5"/>
+          </g>
+          <g id="icon-readings">
+            <path d="M2 12 C5 6.5 9 4 12 4 C15 4 19 6.5 22 12 C19 17.5 15 20 12 20 C9 20 5 17.5 2 12 Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </g>
+          <g id="icon-tarot">
+            <rect x="4" y="6" width="9" height="14" rx="1" transform="rotate(-8 4 6)"/>
+            <rect x="9.5" y="4.5" width="9" height="14" rx="1"/>
+          </g>
+          <g id="icon-portrait">
+            <circle cx="12" cy="12" r="8.5"/>
+            <circle cx="12" cy="12" r="4.7"/>
+            <circle cx="12" cy="12" r="1"/>
+          </g>
+          <g id="icon-astral">
+            <path d="M12 3 C7 3 4 6.4 4 10.5 C4 15 8 18 13 18 C10.5 19.6 7.5 20 5 19.3 C7.7 21.3 12.3 21.6 15.5 19.3 C19.6 17.6 21.5 13.3 20 9.3 C18.8 6 15.7 3 12 3 Z"/>
+          </g>
+        </defs>
 
-      <!-- rotating outer bezel -->
-      <g class="ring-rotating">
-        <circle cx="250" cy="250" r="228" stroke="var(--lavender-dim)" stroke-width="1" fill="none"/>
-        <circle cx="250" cy="250" r="216" stroke="var(--brass)" stroke-width="1" fill="none" opacity="0.5"/>
-        <g id="ticks"></g>
-      </g>
+        <!-- rotating outer bezel -->
+        <g class="ring-rotating">
+          <circle cx="250" cy="250" r="228" stroke="var(--lavender-dim)" stroke-width="1" fill="none"/>
+          <circle cx="250" cy="250" r="216" stroke="var(--brass)" stroke-width="1" fill="none" opacity="0.5"/>
+          <g id="ticks"></g>
+        </g>
 
-      <!-- static hexagram + nodes -->
-      <g id="hexagram"></g>
-      <circle class="seal-center" cx="250" cy="250" r="44"/>
-      <g id="nodes"></g>
-    </svg>
+        <!-- static hexagram + nodes -->
+        <g id="hexagram"></g>
+        <circle class="seal-center" cx="250" cy="250" r="44"/>
+        <g id="nodes"></g>
+      </svg>
 
-    <!-- 3D spinning logo inside center hub -->
-    <div class="seal-center-3d-box" id="wheel-center-3d-box"></div>
-  </div>
+      <!-- 3D spinning logo inside center hub -->
+      <div class="seal-center-3d-box" id="wheel-center-3d-box"></div>
+    </div>
 
-  <div class="service-panel reveal" id="servicePanel">
-    <span class="eyebrow">Select a house</span>
-    <h3>The wheel is waiting</h3>
-    <p class="hint">Choose one of the six points above to read what it offers.</p>
+    <div class="service-panel reveal" id="servicePanel">
+      <span class="eyebrow">Select a house</span>
+      <h3>The wheel is waiting</h3>
+      <p class="hint">Choose one of the six points above to read what it offers.</p>
+    </div>
   </div>
 </section>
 
