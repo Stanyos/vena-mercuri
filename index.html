@@ -267,7 +267,10 @@
     height:auto;
     max-height:480px;
     object-fit:contain;
-    filter:drop-shadow(0 0 45px rgba(221,189,133,0.25));
+    filter:drop-shadow(0 0 35px rgba(221,189,133,0.25));
+    mix-blend-mode:screen;
+    -webkit-mask-image:radial-gradient(ellipse 90% 85% at center, black 65%, transparent 100%);
+    mask-image:radial-gradient(ellipse 90% 85% at center, black 65%, transparent 100%);
   }
   .hero-subtitle-text{
     margin-top:0;
