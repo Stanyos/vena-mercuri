@@ -1153,6 +1153,26 @@ window.selectServiceIntake = function(serviceTitle){
     ];
     const subject = encodeURIComponent(`Vena Mercuri Intake — ${service}`);
     const body = encodeURIComponent(lines.join('\n'));
+
+    // Safety backup to localStorage
+    try {
+      const leadEntry = {
+        fullName: data.get('fullName'),
+        email: data.get('email'),
+        dob: data.get('dob') || null,
+        tob: data.get('tob') || null,
+        pob: data.get('pob') || null,
+        service: service,
+        message: data.get('message') || '',
+        timestamp: new Date().toISOString()
+      };
+      const existingLeads = JSON.parse(localStorage.getItem('vena_mercuri_leads') || '[]');
+      existingLeads.push(leadEntry);
+      localStorage.setItem('vena_mercuri_leads', JSON.stringify(existingLeads));
+    } catch(err) {
+      console.warn('Local lead backup notice:', err);
+    }
+
     window.location.href = `mailto:yesmara29@gmail.com?subject=${subject}&body=${body}`;
 
     status.classList.add('show');
