@@ -252,9 +252,9 @@
     height:100%;
   }
   .hero-codex-wrap{
-    max-width:880px;
+    max-width:860px;
     width:100%;
-    margin:12px auto 32px;
+    margin:10px auto 14px;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -267,7 +267,17 @@
     height:auto;
     max-height:480px;
     object-fit:contain;
-    filter:drop-shadow(0 0 45px rgba(221,189,133,0.22));
+    filter:drop-shadow(0 0 45px rgba(221,189,133,0.25));
+  }
+  .hero-subtitle-text{
+    margin-top:0;
+    margin-bottom:20px;
+    font-size:clamp(17px, 2vw, 21px);
+    color:var(--lavender);
+    max-width:48ch;
+    opacity:0;
+    transform:translateY(18px);
+    animation:fadeUp 1.4s var(--ease) .65s forwards;
   }
 
   .hero h1{
@@ -735,6 +745,8 @@
   <div class="hero-codex-wrap">
     <img src="codex-banner.png" alt="Vena Mercuri — Astrology &amp; Esoteric Arts" class="hero-codex-img">
   </div>
+
+  <p class="hero-subtitle-text">Astrology, tarot, and energy work for the seeker who wants to remember what they already know.</p>
   
   <div class="hero-cta">
     <a href="#services" class="btn">Enter the Chart</a>
