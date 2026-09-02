@@ -1,0 +1,19 @@
+{
+  "name": "vena-mercuri",
+  "version": "1.0.0",
+  "description": "Venamercuri - Celestial Chart Translation & Astrological Practice",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve ."
+  },
+  "keywords": [
+    "astrology",
+    "chart-translation",
+    "venamercuri",
+    "webgl",
+    "threejs"
+  ],
+  "author": "Venamercuri",
+  "license": "MIT"
+}

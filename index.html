@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venamercuri | Celestial Chart Translation & Astrological Practice</title>
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Venamercuri | Celestial Chart Translation & Astrological Practice">
+  <meta name="description" content="Venamercuri reads charts the way a translator reads an old language — not to predict, but to name what's already moving underneath. Practice offerings, chart translation, and somatic quietude.">
+  <meta name="keywords" content="astrology, chart translation, natal chart, venamercuri, astrology practice, somatic chart session">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://venamercuri.nfinitemindai.com">
+  <meta property="og:title" content="Venamercuri | Celestial Chart Translation">
+  <meta property="og:description" content="Every chart is a doorway. Most people are only ever handed the key. Explore chart translation, placement mastery, and somatic chart sessions.">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://venamercuri.nfinitemindai.com">
+  <meta property="twitter:title" content="Venamercuri | Celestial Chart Translation">
+  <meta property="twitter:description" content="Every chart is a doorway. Most people are only ever handed the key.">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Three.js WebGL Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Ambient Starfield Canvas -->
+  <canvas id="bg-starfield"></canvas>
+
+  <div class="app-wrapper">
+    
+    <!-- NAVIGATION HEADER -->
+    <header class="site-header">
+      <a href="#" class="brand-logo" id="header-brand-link">
+        <div id="header-3d-canvas" class="header-canvas-container"></div>
+        <span class="brand-title">Venamercuri</span>
+      </a>
+
+      <nav class="nav-controls">
+        <a href="#practice" class="nav-link">Practice</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button class="btn-qr-trigger js-open-qr" id="btn-header-qr">
+          <span>QR Share</span> ✦
+        </button>
+        <a href="#contact" class="btn-primary" id="btn-nav-touch">Get in Touch</a>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <!-- 3D WebGL Icosahedron Crystal & Wireframe Logo -->
+      <div class="hero-3d-wrapper">
+        <div id="hero-3d-canvas"></div>
+      </div>
+
+      <span class="hero-subtitle">The Practice</span>
+      <h1 class="hero-headline">
+        Every chart is a doorway. Most people are only ever handed the key.
+      </h1>
+
+      <div class="hero-cta-group">
+        <a href="#services" class="btn-primary" id="btn-hero-explore">Explore Services &rarr;</a>
+        <a href="#contact" class="btn-primary" style="background: transparent; border-color: rgba(251,208,101,0.3);" id="btn-hero-contact">Request Session</a>
+      </div>
+    </section>
+
+    <!-- THE PRACTICE SECTION -->
+    <section class="section-practice" id="practice">
+      <div class="glass-card">
+        <span class="section-tag">Philosophy & Approach</span>
+        
+        <p class="practice-text-lead">
+          Venamercuri reads charts the way a translator reads an old language — not to predict, but to name what’s already moving underneath. The work spans the practical and the unprovable: a class that teaches you to read your own placements, a session that puts your body somewhere quieter than thought, a portrait built from the frequency of your chart rather than your face.
+        </p>
+
+        <p class="practice-text-lead">
+          None of it asks you to believe anything in particular. It only asks you to look closely at what’s already written.
+        </p>
+
+        <p class="practice-text-sub">
+          The approach stays the same regardless of the medium: look at what’s actually there, say it plainly, and leave room for the client to disagree. Chart work should clarify a life, not replace the living of it.
+        </p>
+
+        <div class="signature-line">
+          Venamercuri
+        </div>
+      </div>
+    </section>
+
+    <!-- SPINNING WHEEL OF SERVICE SECTION -->
+    <section class="section-wheel" id="services">
+      <div class="section-header">
+        <span class="section-tag">Interactive Offerings</span>
+        <h2 class="section-title">Spinning Wheel of Service</h2>
+        <p class="section-desc">Rotate the celestial wheel or select a node to explore practice sessions, masterclasses, and chart translations.</p>
+      </div>
+
+      <div class="wheel-container">
+        <!-- Interactive Wheel Stage -->
+        <div class="wheel-stage">
+          <div class="wheel-ring-outer" id="wheel-ring-outer">
+            <div id="wheel-nodes"></div>
+          </div>
+          <div class="wheel-ring-inner"></div>
+          <div class="wheel-center-hub" id="wheel-center-hub" title="Click to cycle services">
+            <div id="hub-3d-canvas" class="hub-canvas-container"></div>
+          </div>
+        </div>
+
+        <!-- Active Service Card Display -->
+        <div class="service-card-display" id="service-display">
+          <!-- Dynamically populated by spinning-wheel.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & LEAD INTAKE FLOW -->
+    <section class="section-contact" id="contact">
+      <div class="section-header" style="text-align: center; margin-bottom: 2.5rem;">
+        <span class="section-tag">Direct Intake</span>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="section-desc">Provide your natal details to request a chart translation or consultation session.</p>
+      </div>
+
+      <div class="lead-form-wrapper">
+        <!-- Form Content Container -->
+        <div id="lead-form-content">
+          <form id="lead-form" novalidate>
+            <div class="form-grid">
+              
+              <div class="form-group">
+                <label class="form-label" for="lead-name">Full Name *</label>
+                <input type="text" id="lead-name" class="form-input" placeholder="Your name" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="lead-email">Email Address *</label>
+                <input type="email" id="lead-email" class="form-input" placeholder="you@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="lead-dob">Date of Birth *</label>
+                <input type="date" id="lead-dob" class="form-input" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="lead-tob">Time of Birth (If known)</label>
+                <input type="text" id="lead-tob" class="form-input" placeholder="e.g. 02:45 PM or Exact time unknown">
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="lead-birthplace">City & Country of Birth *</label>
+                <input type="text" id="lead-birthplace" class="form-input" placeholder="e.g. Kyoto, Japan or London, UK" required>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="lead-service">Desired Offering</label>
+                <select id="lead-service" class="form-select">
+                  <option value="Natal Chart Translation">Natal Chart Translation</option>
+                  <option value="Placement Mastery Class">Placement Mastery Class</option>
+                  <option value="Frequency Sound & Chart Portrait">Frequency Sound & Chart Portrait</option>
+                  <option value="Somatic Chart Session">Somatic Chart Session</option>
+                  <option value="General Inquiry">General Consultation Inquiry</option>
+                </select>
+              </div>
+
+              <div class="form-group full-width">
+                <label class="form-label" for="lead-notes">Intentions & Specific Questions</label>
+                <textarea id="lead-notes" class="form-textarea" placeholder="Share any specific placements, current life transits, or intentions for this session..."></textarea>
+              </div>
+
+            </div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn-primary" id="btn-submit-lead">
+                Submit Natal Details &rarr;
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success Confirmation Card (Hidden initially) -->
+        <div class="lead-success-card" id="lead-success-card">
+          <div class="success-icon">✦</div>
+          <h3 class="success-title">Intake Received</h3>
+          <p class="success-desc">
+            Your placement details have been recorded into the private queue. Venamercuri will review your chart frequency and reach out to your provided email address shortly.
+          </p>
+          <button class="btn-secondary" id="btn-reset-lead">Submit Another Request</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-brand">VENAMERCURI</div>
+      <div class="footer-domain">venamercuri.nfinitemindai.com</div>
+      <p style="margin-bottom: 1rem;">
+        <button class="btn-qr-trigger js-open-qr" style="display: inline-flex;" id="btn-footer-qr">
+          <span>Scan Site QR Code</span> ✦
+        </button>
+      </p>
+      <p>&copy; 2026 Venamercuri. All rights reserved. Celestial Chart Translation & Practice.</p>
+    </footer>
+
+  </div>
+
+  <!-- QR CODE UTILITY MODAL -->
+  <div class="modal-backdrop" id="qr-modal">
+    <div class="qr-modal-card">
+      <button class="modal-close-btn" id="qr-modal-close" aria-label="Close modal">&times;</button>
+      
+      <span class="section-tag" style="display: inline-block; margin-bottom: 0.5rem;">Web Owner Tool</span>
+      <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: #fff;">Scan & Share Site</h3>
+      
+      <div class="qr-preview-box">
+        <canvas id="qr-canvas"></canvas>
+      </div>
+
+      <div class="qr-url-text">venamercuri.nfinitemindai.com</div>
+
+      <div class="modal-actions">
+        <button class="btn-secondary" id="btn-copy-url">Copy Link</button>
+        <button class="btn-primary" style="padding: 0.65rem 1.25rem; font-size: 0.8rem;" id="btn-download-qr">Download PNG</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Background Starfield Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('bg-starfield');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      const stars = [];
+      const numStars = 120;
+
+      for (let i = 0; i < numStars; i++) {
+        stars.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.5 + 0.5,
+          alpha: Math.random() * 0.7 + 0.2,
+          speed: Math.random() * 0.05 + 0.01
+        });
+      }
+
+      function drawStars() {
+        ctx.clearRect(0, 0, width, height);
+        stars.forEach(star => {
+          star.alpha += (Math.random() - 0.5) * 0.02;
+          if (star.alpha < 0.1) star.alpha = 0.1;
+          if (star.alpha > 0.8) star.alpha = 0.8;
+
+          ctx.fillStyle = `rgba(251, 208, 101, ${star.alpha})`;
+          ctx.beginPath();
+          ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+          ctx.fill();
+        });
+        requestAnimationFrame(drawStars);
+      }
+
+      drawStars();
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+    });
+  </script>
+
+  <!-- Application Scripts -->
+  <script src="js/three-logo.js"></script>
+  <script src="js/spinning-wheel.js"></script>
+  <script src="js/lead-flow.js"></script>
+  <script src="js/qr-generator.js"></script>
+</body>
+</html>
