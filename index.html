@@ -602,15 +602,19 @@
   .cta-footer{
     position:relative; z-index:1;
     text-align:center;
-    padding-top:120px;
+    padding-top:100px;
     padding-bottom:60px;
   }
-  .moon-phase{
-    width:80px; height:80px;
-    margin:0 auto 30px;
-    border-radius:50%;
-    background:var(--parchment);
-    box-shadow:inset 22px 0 0 0 var(--void), 0 0 40px rgba(237,230,214,.25);
+  .footer-3d-logo-box{
+    width:150px;
+    height:150px;
+    margin:0 auto 24px;
+    position:relative;
+    filter:drop-shadow(0 0 40px rgba(221,189,133,0.4));
+  }
+  .footer-3d-canvas-elem{
+    width:100%;
+    height:100%;
   }
   .cta-footer h2{
     font-size:clamp(30px,4.2vw,52px);
@@ -870,12 +874,12 @@
         <label for="service">Which service are you interested in?</label>
         <select id="service" name="service" required>
           <option value="" disabled selected>Choose one</option>
-          <option>Guided Meditation</option>
-          <option>Astrology Classes</option>
-          <option>Astrology Reading</option>
+          <option>Guided Meditation (Group Classes)</option>
+          <option>Astrology Classes (Group Cohorts)</option>
+          <option>Astrology Readings (Individual &amp; Family)</option>
           <option>Intuitive Tarot</option>
           <option>Energy Portraits</option>
-          <option>Astral Projection</option>
+          <option>Astral Projection (Group Classes)</option>
           <option>Not sure yet</option>
         </select>
       </div>
@@ -894,7 +898,9 @@
 
 <!-- CTA FOOTER -->
 <section class="section cta-footer" id="reach">
-  <div class="moon-phase reveal" aria-hidden="true"></div>
+  <div class="footer-3d-logo-box reveal" id="footer-3d-logo-box">
+    <div id="footer-3d-logo" class="footer-3d-canvas-elem"></div>
+  </div>
   <h2 class="reveal">The sky doesn't wait. Neither should you.</h2>
   <div class="hero-cta reveal" style="opacity:1; transform:none; animation:none;">
     <a href="#intake" class="btn">Reach Out</a>
@@ -1016,18 +1022,18 @@
   const services = [
     {
       id:'meditation', label:'Meditation', icon:'icon-meditation',
-      title:'Guided Meditation',
-      body:"One-on-one guided journeys designed to quiet mental chatter and drop into somatic stillness. Sessions are tailored to your current planetary transits to ground astrological insights directly into bodily presence."
+      title:'Guided Meditation (Group Classes)',
+      body:"Immersive group meditation classes designed to quiet mental chatter and drop into somatic stillness. Gathered in shared celestial rhythm, sessions are tailored to current planetary transits to ground astrological insights directly into bodily presence."
     },
     {
       id:'classes', label:'Classes', icon:'icon-classes',
-      title:'Astrology Classes',
-      body:"Learn to read your own sky. Small cohorts move through structured modules—from twelve-house architecture and planetary aspects to transit tracking and holistic chart synthesis."
+      title:'Astrology Classes (Group Cohorts)',
+      body:"Learn to read your own sky. Small live cohorts move through structured modules—from twelve-house architecture and planetary aspects to transit tracking and holistic chart synthesis."
     },
     {
       id:'readings', label:'Readings', icon:'icon-readings',
-      title:'Astrology Readings',
-      body:"A full walkthrough of your natal blueprint—placements, aspects, and recurring life patterns. Focused on naming what is already moving underneath so you can navigate life with clarity and intention."
+      title:'Astrology Readings (Individual & Family)',
+      body:"In-depth astrological readings offered for both individuals and families. A comprehensive walkthrough of personal natal blueprints or shared family dynamic charts—uncovering relational patterns, generational placements, and paths toward mutual harmony and individual clarity."
     },
     {
       id:'tarot', label:'Tarot', icon:'icon-tarot',
@@ -1041,8 +1047,8 @@
     },
     {
       id:'astral', label:'Astral', icon:'icon-astral',
-      title:'Astral Projection',
-      body:"One-on-one guidance into conscious out-of-body navigation and deep trance states, designed for those meditating regularly and ready to explore expanded awareness in a grounded framework."
+      title:'Astral Projection (Group Classes)',
+      body:"Conscious group classes in out-of-body navigation and deep trance states. Designed for those meditating regularly and ready to explore expanded awareness, visionary practice, and astral theory within a grounded, supportive group container."
     }
   ];
 
@@ -1308,6 +1314,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initThreeLogo('hero-3d-logo', 1.05);
     // Sized for Center of Wheel
     initThreeLogo('wheel-center-3d-box', 0.9);
+    // Larger spinning logo in Footer replacing static moon
+    initThreeLogo('footer-3d-logo', 1.35);
   }
 });
 

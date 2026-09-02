@@ -41,12 +41,12 @@ async function runSuite() {
   // Test 2: Services Dropdown Options
   console.log('\nTest Group 2: Services Dropdown Options');
   const expectedServices = [
-    'Guided Meditation',
-    'Astrology Classes',
-    'Astrology Reading',
+    'Guided Meditation (Group Classes)',
+    'Astrology Classes (Group Cohorts)',
+    'Astrology Readings (Individual &amp; Family)',
     'Intuitive Tarot',
     'Energy Portraits',
-    'Astral Projection'
+    'Astral Projection (Group Classes)'
   ];
   expectedServices.forEach(s => {
     assert(htmlContent.includes(`<option>${s}</option>`), `Option '${s}' present in #service select`);
@@ -57,12 +57,12 @@ async function runSuite() {
   function simulateSelectService(serviceTitle) {
     const options = [
       'Choose one',
-      'Guided Meditation',
-      'Astrology Classes',
-      'Astrology Reading',
+      'Guided Meditation (Group Classes)',
+      'Astrology Classes (Group Cohorts)',
+      'Astrology Readings (Individual & Family)',
       'Intuitive Tarot',
       'Energy Portraits',
-      'Astral Projection',
+      'Astral Projection (Group Classes)',
       'Not sure yet'
     ];
     let selected = null;
@@ -76,9 +76,9 @@ async function runSuite() {
     return selected;
   }
   assert(simulateSelectService('Energy Portraits') === 'Energy Portraits', 'Auto-selects Energy Portraits');
-  assert(simulateSelectService('Guided Meditation') === 'Guided Meditation', 'Auto-selects Guided Meditation');
-  assert(simulateSelectService('Astrology Classes') === 'Astrology Classes', 'Auto-selects Astrology Classes');
-  assert(simulateSelectService('Astral Projection') === 'Astral Projection', 'Auto-selects Astral Projection');
+  assert(simulateSelectService('Guided Meditation') === 'Guided Meditation (Group Classes)', 'Auto-selects Guided Meditation');
+  assert(simulateSelectService('Astrology Classes') === 'Astrology Classes (Group Cohorts)', 'Auto-selects Astrology Classes');
+  assert(simulateSelectService('Astral Projection') === 'Astral Projection (Group Classes)', 'Auto-selects Astral Projection');
 
   // Test 4: Mailto Link & Payload Construction Simulation
   console.log('\nTest Group 4: Mailto Payload & Data Encoding');
