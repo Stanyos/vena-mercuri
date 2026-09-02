@@ -239,17 +239,35 @@
     overflow:hidden;
   }
   .hero-logo-box{
-    width:160px;
-    height:160px;
+    width:90px;
+    height:90px;
     position:relative;
-    margin-bottom:12px;
-    filter:drop-shadow(0 0 30px rgba(221,189,133,0.3));
+    margin-bottom:0;
+    filter:drop-shadow(0 0 25px rgba(221,189,133,0.35));
     opacity:0;
     animation:fadeIn 1.4s var(--ease) .2s forwards;
   }
   .hero-3d-canvas-elem{
     width:100%;
     height:100%;
+  }
+  .hero-codex-wrap{
+    max-width:880px;
+    width:100%;
+    margin:12px auto 32px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    transform:translateY(18px);
+    animation:fadeUp 1.4s var(--ease) .4s forwards;
+  }
+  .hero-codex-img{
+    width:100%;
+    height:auto;
+    max-height:480px;
+    object-fit:contain;
+    filter:drop-shadow(0 0 45px rgba(221,189,133,0.22));
   }
 
   .hero h1{
@@ -714,8 +732,9 @@
     <div id="hero-3d-logo" class="hero-3d-canvas-elem"></div>
   </div>
 
-  <h1>Written in the <em>sky</em></h1>
-  <p>Astrology, tarot, and energy work for the seeker who wants to remember what they already know.</p>
+  <div class="hero-codex-wrap">
+    <img src="codex-banner.png" alt="Vena Mercuri — Astrology &amp; Esoteric Arts" class="hero-codex-img">
+  </div>
   
   <div class="hero-cta">
     <a href="#services" class="btn">Enter the Chart</a>
