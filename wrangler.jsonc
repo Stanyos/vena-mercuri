@@ -1,13 +1,24 @@
 {
   "name": "vena-mercuri",
+  "main": "worker.js",
   "compatibility_date": "2024-09-01",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
   "routes": [
     {
       "pattern": "venamercuri.nfinitemindai.com",
       "custom_domain": true
+    }
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "yesmara29@gmail.com",
+      "allowed_sender_addresses": [
+        "contact@venamercuri.nfinitemindai.com"
+      ]
     }
   ]
 }

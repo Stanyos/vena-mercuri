@@ -2,6 +2,7 @@
 tests
 node_modules
 wrangler.jsonc
+worker.js
 package.json
 package-lock.json
 CNAME

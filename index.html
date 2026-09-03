@@ -584,12 +584,15 @@
   }
   .intake-status{
     font-family:var(--display);
-    font-size:12px;
-    letter-spacing:.1em;
+    font-size:13px;
+    letter-spacing:.05em;
     color:var(--brass-bright);
     display:none;
+    margin-left:12px;
   }
-  .intake-status.show{ display:inline; }
+  .intake-status.show{ display:inline-block; }
+  .intake-status.error{ color:#ff8585; }
+  .intake-status.success{ color:#85ffb8; }
 
   @media (max-width:820px){
     .intake-wrap{ grid-template-columns:1fr; }
@@ -845,8 +848,8 @@
   <div class="intake-wrap reveal">
     <div class="intake-note">
       <p>Birth details are only needed for chart-based work — readings, classes, and portraits. Meditation and tarot sessions don't require them.</p>
-      <p>Nothing here is stored or sent anywhere automatically; submitting opens a pre-filled email in your own mail app, addressed directly to me.</p>
-      <div class="contact-line">Prefer to write directly?<br><a href="mailto:yesmara29@gmail.com">yesmara29@gmail.com</a></div>
+      <p>Inquiries are delivered securely and directly to my private inbox. I read every intake myself and reply within a few days.</p>
+      <div class="contact-line">Prefer to write directly?<br><a href="mailto:contact@venamercuri.nfinitemindai.com">contact@venamercuri.nfinitemindai.com</a></div>
     </div>
 
     <form class="intake-form" id="intakeForm">
@@ -888,9 +891,9 @@
         <textarea id="message" name="message" placeholder="Say as much or as little as you'd like."></textarea>
       </div>
       <div class="intake-submit">
-        <button type="submit" class="btn">Send Intake</button>
-        <span class="intake-hint">Opens your email app with this filled in</span>
-        <span class="intake-status" id="intakeStatus">Drafted — check your email app.</span>
+        <button type="submit" class="btn" id="intakeSubmitBtn">Send Intake</button>
+        <span class="intake-hint">Delivered directly to my private inbox</span>
+        <span class="intake-status" id="intakeStatus"></span>
       </div>
     </form>
   </div>
@@ -913,7 +916,7 @@
       <a href="#services">Services</a>
       <a href="#manifesto">The Practice</a>
       <button class="btn btn-qr js-open-qr">QR Share ✦</button>
-      <a href="mailto:yesmara29@gmail.com">Contact</a>
+      <a href="mailto:contact@venamercuri.nfinitemindai.com">Contact</a>
     </nav>
     <nav class="footer-legal">
       <a href="terms.html">Terms of Service</a>
@@ -1175,48 +1178,73 @@ window.selectServiceIntake = function(serviceTitle){
 (function(){
   const form = document.getElementById('intakeForm');
   const status = document.getElementById('intakeStatus');
+  const submitBtn = document.getElementById('intakeSubmitBtn');
   if(!form) return;
 
-  form.addEventListener('submit', function(e){
+  form.addEventListener('submit', async function(e){
     e.preventDefault();
-    const data = new FormData(form);
-    const service = data.get('service') || 'Not specified';
-    const lines = [
-      `Name: ${data.get('fullName') || ''}`,
-      `Email: ${data.get('email') || ''}`,
-      `Date of Birth: ${data.get('dob') || 'Not provided'}`,
-      `Time of Birth: ${data.get('tob') || 'Not provided'}`,
-      `Place of Birth: ${data.get('pob') || 'Not provided'}`,
-      '',
-      `What they're hoping to explore:`,
-      data.get('message') || '—'
-    ];
-    const subject = encodeURIComponent(`Vena Mercuri Intake — ${service}`);
-    const body = encodeURIComponent(lines.join('\n'));
 
-    // Safety backup to localStorage
-    try {
-      const leadEntry = {
-        fullName: data.get('fullName'),
-        email: data.get('email'),
-        dob: data.get('dob') || null,
-        tob: data.get('tob') || null,
-        pob: data.get('pob') || null,
-        service: service,
-        message: data.get('message') || '',
-        timestamp: new Date().toISOString()
-      };
-      const existingLeads = JSON.parse(localStorage.getItem('vena_mercuri_leads') || '[]');
-      existingLeads.push(leadEntry);
-      localStorage.setItem('vena_mercuri_leads', JSON.stringify(existingLeads));
-    } catch(err) {
-      console.warn('Local lead backup notice:', err);
+    const data = new FormData(form);
+    const payload = {
+      fullName: (data.get('fullName') || '').trim(),
+      email: (data.get('email') || '').trim(),
+      dob: data.get('dob') || '',
+      tob: data.get('tob') || '',
+      pob: (data.get('pob') || '').trim(),
+      service: (data.get('service') || '').trim(),
+      message: (data.get('message') || '').trim()
+    };
+
+    if(!payload.fullName || !payload.email || !payload.service){
+      if(status){
+        status.innerText = 'Please complete all required fields.';
+        status.className = 'intake-status show error';
+      }
+      return;
     }
 
-    window.location.href = `mailto:yesmara29@gmail.com?subject=${subject}&body=${body}`;
+    if(submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Sending...';
+    }
+    if(status){
+      status.innerText = 'Connecting and delivering inquiry...';
+      status.className = 'intake-status show';
+    }
 
-    status.classList.add('show');
-    setTimeout(()=> status.classList.remove('show'), 6000);
+    try {
+      const resp = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const resData = await resp.json().catch(() => ({}));
+
+      if(resp.ok && resData.success){
+        if(status){
+          status.innerText = resData.message || 'Inquiry delivered. I will review and reply shortly.';
+          status.className = 'intake-status show success';
+        }
+        form.reset();
+        if(submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerText = 'Inquiry Sent ✦';
+          setTimeout(() => { submitBtn.innerText = 'Send Intake'; }, 5000);
+        }
+      } else {
+        throw new Error(resData.error || 'Delivery failed. Please try again.');
+      }
+    } catch(err) {
+      if(status){
+        status.innerText = err.message || 'Unable to deliver message right now. Please try again or write directly to contact@venamercuri.nfinitemindai.com.';
+        status.className = 'intake-status show error';
+      }
+      if(submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Retry Send';
+      }
+    }
   });
 })();
 
