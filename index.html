@@ -1339,54 +1339,62 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.width = size;
     canvas.height = size;
 
+    // Background
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, size, size);
 
+    // Standard ISO/IEC 18004 QR Matrix (Version 3-M) for https://venamercuri.nfinitemindai.com
+    const qrMatrix = [
+      '11111110010110100010001111111',
+      '10000010110110101010001000001',
+      '10111010100100101001101011101',
+      '10111010110100111100101011101',
+      '10111010011001001111101011101',
+      '10000010000001101100001000001',
+      '11111110101010101010101111111',
+      '00000000100011010011100000000',
+      '10000010101000110101011001110',
+      '10111101010010110111000110110',
+      '01001010101100010010001110000',
+      '10010101100110111001110011000',
+      '00101110010001101000101100001',
+      '01110101100101110001001110011',
+      '11101010000111111000100001100',
+      '11001001100011101010111100101',
+      '10110111110110100101000001100',
+      '10101100101000011011111110111',
+      '11110011000111110101111011001',
+      '10111001111010100001001110000',
+      '10011010010110010100111110111',
+      '00000000111101010111100011000',
+      '11111110011111110001101011100',
+      '10000010001101001001100010010',
+      '10111010000111011001111111001',
+      '10111010001011011111010001101',
+      '10111010010011010011011111110',
+      '10000010010100010001001001101',
+      '11111110110001000101001111100'
+    ];
+
+    const border = 2;
+    const cols = qrMatrix.length;
+    const totalCols = cols + border * 2;
+    const moduleSize = Math.floor(size / totalCols);
+    const offset = Math.floor((size - totalCols * moduleSize) / 2);
+
     ctx.fillStyle = '#08070c';
-    const moduleSize = 8;
-    const cols = Math.floor(size / moduleSize);
-
-    let seed = 0;
-    for(let i=0; i<url.length; i++) seed += url.charCodeAt(i);
-    function pseudoRand(){
-      const x = Math.sin(seed++) * 10000;
-      return x - Math.floor(x);
-    }
-
-    for(let r=0; r<cols; r++){
-      for(let c=0; c<cols; c++){
-        const isTL = r < 7 && c < 7;
-        const isTR = r < 7 && c >= cols - 7;
-        const isBL = r >= cols - 7 && c < 7;
-        if(!isTL && !isTR && !isBL){
-          if(pseudoRand() > 0.45){
-            ctx.fillRect(c * moduleSize, r * moduleSize, moduleSize - 1, moduleSize - 1);
-          }
+    for (let r = 0; r < cols; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (qrMatrix[r][c] === '1') {
+          ctx.fillRect(
+            offset + (c + border) * moduleSize,
+            offset + (r + border) * moduleSize,
+            moduleSize,
+            moduleSize
+          );
         }
       }
     }
-
-    const drawFinder = (x,y)=>{
-      ctx.fillStyle = '#08070c';
-      ctx.fillRect(x, y, 7*moduleSize, 7*moduleSize);
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(x+moduleSize, y+moduleSize, 5*moduleSize, 5*moduleSize);
-      ctx.fillStyle = '#5c1a2b';
-      ctx.fillRect(x+2*moduleSize, y+2*moduleSize, 3*moduleSize, 3*moduleSize);
-    };
-
-    drawFinder(0, 0);
-    drawFinder((cols - 7)*moduleSize, 0);
-    drawFinder(0, (cols - 7)*moduleSize);
-
-    ctx.fillStyle = '#b08d57';
-    ctx.beginPath();
-    ctx.arc(size/2, size/2, 11, 0, Math.PI*2);
-    ctx.fill();
-    ctx.fillStyle = '#08070c';
-    ctx.beginPath();
-    ctx.arc(size/2, size/2, 5, 0, Math.PI*2);
-    ctx.fill();
   }
 
   openBtns.forEach(b => b.addEventListener('click', (e)=>{

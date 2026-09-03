@@ -1,0 +1,13 @@
+{
+  "name": "vena-mercuri",
+  "compatibility_date": "2024-09-01",
+  "assets": {
+    "directory": "."
+  },
+  "routes": [
+    {
+      "pattern": "venamercuri.nfinitemindai.com",
+      "custom_domain": true
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+.git
+tests
+node_modules
+wrangler.jsonc
+package.json
+package-lock.json
+CNAME
